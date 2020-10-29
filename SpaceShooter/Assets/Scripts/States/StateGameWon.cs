@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateGameWon : GameState
 {
-   public StateGameWon(GameManager2 gm) : base(gm) {}
+   public StateGameWon(GameStateManager gm) : base(gm) {}
  
     public override void StateEnter(){
        

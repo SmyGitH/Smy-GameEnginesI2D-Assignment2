@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class GameState
 {
-    protected GameManager2 m_gameManager;
+    protected GameStateManager m_gameManager;
 
-    public GameState(GameManager2 gm){
+    public GameState(GameStateManager gm){
         m_gameManager = gm;
     }
 
