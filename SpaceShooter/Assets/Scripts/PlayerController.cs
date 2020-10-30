@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private float maxSpeed = 5f;
+    public float maxSpeed = 5f;
     private float rotSpeed = 180f;
     private float shipBoundaries = 0.5f;
     // Start is called before the first frame update
