@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     public float maxSpeed = 5f;
     private float rotSpeed = 180f;
-    private float shipBoundaries = 0.5f;
+    //private float shipBoundaries = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = new Vector3 (0, Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime, 0);
         pos += rot * velocity;
 
-        //Restricting player boundaries
+       /* //Restricting player boundaries
         if (pos.y + shipBoundaries > Camera.main.orthographicSize){
             pos.y = Camera.main.orthographicSize - shipBoundaries;
         }
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         }
         if(pos.x - shipBoundaries < -widthOrtho){
              pos.x = -widthOrtho + shipBoundaries;
-        }
+        }*/
 
         transform.position = pos;
     }

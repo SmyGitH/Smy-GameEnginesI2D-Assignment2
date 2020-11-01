@@ -22,7 +22,6 @@ public class EnemyShooting : MonoBehaviour
 
         if(cooldownTimer <= 0){
             //shoot
-            Debug.Log("Shoot");
             cooldownTimer = fireRate;
 
             Vector3 offset = transform.rotation * new Vector3(0,0.5f,0);

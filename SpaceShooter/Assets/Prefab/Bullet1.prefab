@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2579657234412971161}
   - component: {fileID: 1449151806}
   - component: {fileID: 1449151808}
-  - component: {fileID: 3875408928918367400}
-  m_Layer: 8
+  - component: {fileID: 7980172014586523258}
+  m_Layer: 12
   m_Name: Bullet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b071779ca9b6574ebf49b4963a0f36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 8
+  maxSpeed: 16
 --- !u!114 &1449151808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTimer: 1
---- !u!114 &3875408928918367400
+--- !u!114 &7980172014586523258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,8 +169,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2579657234412971162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e9dc90860183348b38364dd0e864e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 649b907fa3d7a274ebc7a0e2dbe0e3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
   invulnerablePeriod: 0
+  weaponsUp: 0
+  speedUp: 0
+  shieldUp: 0
+  powerTimer: 0
