@@ -9,23 +9,23 @@ public class Score : MonoBehaviour
     public Text scoreText;
     public Text levelText;
     public Text timerText;
-    public float score;
-    public float level;
-    public float timer;
+    public Text healthText;
+    
+    private GameManager gm;
+    private CollisionHandler ch;
     // Start is called before the first frame update
     void Start()
     {
-        score = 0f;
-        level = 1f;
-        timer = 120f;
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        ch = GameObject.Find("PlayerShip").GetComponent<CollisionHandler>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + score;
-        levelText.text = "Level: " + level;
-        timerText.text = "Level Time: " + timer;
-       
+        scoreText.text = "Score: " + gm.score;
+        levelText.text = "Level: " + gm.level;
+        timerText.text = "Level Time: " + (int)gm.timer;
+        healthText.text = "Health: " + ch.health;
     }
 }

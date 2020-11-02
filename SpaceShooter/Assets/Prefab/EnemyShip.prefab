@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   invulnerablePeriod: 0
+  deathSound: {fileID: 3322107582237139907, guid: f2b4cbe60b29856479959e303d6c7288, type: 3}
   weaponsUp: 0
   speedUp: 0
   shieldUp: 0

@@ -9,6 +9,7 @@ public class CollisionHandler : MonoBehaviour
   private int correctLayer;
   public float invulnerablePeriod;
   private SpriteRenderer sprite;
+  public AudioSource deathSound;
   public bool weaponsUp;
   public bool speedUp;
   public bool shieldUp;
@@ -17,7 +18,8 @@ public class CollisionHandler : MonoBehaviour
 
   private PlayerShooting playerShoot;
   private PlayerController playerMove;
-  public Score scoreScript;
+  private GameManager gameManager;
+  
 
   private void Start() {
 
@@ -26,7 +28,7 @@ public class CollisionHandler : MonoBehaviour
       sprite = GetComponent<SpriteRenderer>();
       playerShoot = gameObject.GetComponent<PlayerShooting>();
       playerMove = gameObject.GetComponent<PlayerController>();
-      scoreScript = gameObject.GetComponent<Score>();
+      gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
       gameTime = Time.deltaTime;
 
@@ -50,11 +52,11 @@ public class CollisionHandler : MonoBehaviour
       if(other.gameObject.tag == "WeaponUp"){
           weaponsUp = true;
           Destroy(other.gameObject);
-          powerTimer = 5f;
+          powerTimer = 10f;
       }else if(other.gameObject.tag == "SpeedUp"){
           speedUp = true;
           Destroy(other.gameObject);
-          powerTimer = 5f;
+          powerTimer = 10f;
       }else if (other.gameObject.tag == "ShieldUp"){
           health++;
           Destroy(other.gameObject);
@@ -68,7 +70,7 @@ public class CollisionHandler : MonoBehaviour
 
       if(weaponsUp){
           playerShoot.fireRate = 0.5f;
-          powerTimer -= gameTime / 2;
+          powerTimer -= gameTime / 5;
           if(powerTimer <= 0){
               weaponsUp = false;
               playerShoot.fireRate = 0.75f;
@@ -76,7 +78,7 @@ public class CollisionHandler : MonoBehaviour
       }
 
       if(speedUp){
-          powerTimer -= gameTime / 2;
+          powerTimer -= gameTime / 5;
           playerMove.maxSpeed = 12f;
           if(powerTimer <= 0){
               speedUp = false;
@@ -103,22 +105,30 @@ public class CollisionHandler : MonoBehaviour
 
       if (health <= 0){
           Die();
+          
       }
   }
 
   private void Die(){
       if(gameObject.tag == "Enemy"){
           Destroy(gameObject);
-          scoreScript.score += 150;
+          gameManager.score += 150;
+          //deathSound.Play();
       }
 
       if(gameObject.tag == "Boss"){
           Destroy(gameObject);
-          scoreScript.score += 300;
+          gameManager.score += 300;
+          //deathSound.Play();
       }
 
-      if(gameObject.layer == 8 || gameObject.layer == 12 || gameObject.layer == 13){
+      if(gameObject.layer == 12 || gameObject.layer == 13){
           Destroy(gameObject);
+      }
+
+      if(gameObject.layer == 8  || gameObject.layer == 10){
+          Destroy(gameObject);
+          //deathSound.Play();
       }
       
   }
