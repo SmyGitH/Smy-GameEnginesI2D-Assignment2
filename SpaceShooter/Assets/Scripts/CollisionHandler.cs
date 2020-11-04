@@ -10,6 +10,8 @@ public class CollisionHandler : MonoBehaviour
   public float invulnerablePeriod;
   private SpriteRenderer sprite;
   public AudioSource deathSound;
+  private Animator animator;
+  private float flashTimer;
   public bool weaponsUp;
   public bool speedUp;
   public bool shieldUp;
@@ -29,6 +31,7 @@ public class CollisionHandler : MonoBehaviour
       playerShoot = gameObject.GetComponent<PlayerShooting>();
       playerMove = gameObject.GetComponent<PlayerController>();
       gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+      animator = GameObject.Find("DamageF").GetComponent<Animator>();
 
       gameTime = Time.deltaTime;
 
@@ -44,9 +47,16 @@ public class CollisionHandler : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D other) {
 
-      if(other.gameObject.layer == 8 || other.gameObject.layer == 9 || other.gameObject.layer == 12 || other.gameObject.layer == 13){
+      if(other.gameObject.layer == 9 || other.gameObject.layer == 12 || other.gameObject.layer == 13){
           health--;
           invulnerableTimer = invulnerablePeriod;
+      }
+
+      if(other.gameObject.layer == 8){
+          health--;
+          animator.SetBool("Damaged", true);
+          invulnerableTimer = invulnerablePeriod;
+          
       }
 
       if(other.gameObject.tag == "WeaponUp"){
@@ -85,6 +95,14 @@ public class CollisionHandler : MonoBehaviour
               playerMove.maxSpeed = 10f;
           }
       }
+
+      
+    if(animator.GetBool("Damaged") == true){
+        animator.SetBool("Damaged", false);
+    }
+        
+
+      
       
   }
 

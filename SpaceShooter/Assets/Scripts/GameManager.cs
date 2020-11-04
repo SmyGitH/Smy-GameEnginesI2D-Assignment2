@@ -12,11 +12,15 @@ public class GameManager : MonoBehaviour
     public float score;
     public float level;
     public float timer;
+    private float flashTimer;
+    private Animator levelFlash;
+    private Text levelText;
 
     void Start()
     {
         
-        
+        levelFlash = GameObject.Find("Flash").GetComponent<Animator>();
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
         gameTime = Time.deltaTime;
         score = 0f;
         level = 0f;
@@ -29,8 +33,21 @@ public class GameManager : MonoBehaviour
         timer -= gameTime / 5;
 
          if(timer <= 0){
+          
            setLevel();
+           levelFlash.SetBool("LevelSwitch", true);
+           flashTimer = 3f;
         }
+
+        if(flashTimer > 0){
+            flashTimer -= gameTime / 2;
+            if(flashTimer <= 0){
+                levelFlash.SetBool("LevelSwitch", false);
+            }
+        }
+
+
+        levelText.text = "Level " + level;
 
        
     }
@@ -41,7 +58,7 @@ public class GameManager : MonoBehaviour
 
 
         switch(level){
-            case 1: timer = 120f;
+            case 1: timer = 10f;
             DestroyBosses();
             DestroyEnemies();
             break;
@@ -49,6 +66,7 @@ public class GameManager : MonoBehaviour
             case 2: timer = 140f;
             DestroyBosses();
             DestroyEnemies();
+            
             break;
 
             case 3: timer = 160f;
