@@ -8,7 +8,7 @@ public class PlayerShooting : MonoBehaviour
     public float fireRate = 1f;
     private float cooldownTimer = 0;
     private float gameTime;
-    public AudioSource shootSound;
+    
 
 
     private void Start() {
@@ -27,7 +27,7 @@ public class PlayerShooting : MonoBehaviour
             Vector3 offset = transform.rotation * new Vector3(0,0.5f,0);
 
             Instantiate(bullet, transform.position + offset, transform.rotation);
-            shootSound.Play();
+           
         }
         
     }

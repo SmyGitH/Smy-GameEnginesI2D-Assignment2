@@ -32,6 +32,7 @@ public class PowerUpSpawn : MonoBehaviour
     }
 
     private void SpawnPowerUp(){
-        Instantiate(powerUps[Random.Range(0,powerUps.Length)],spawnLocation.position, spawnLocation.rotation);
+        Vector2 spawn = new Vector2(Random.Range(-15, 15), Random.Range(-8,8));
+        Instantiate(powerUps[Random.Range(0,powerUps.Length)],spawn, spawnLocation.rotation);
     }
 }

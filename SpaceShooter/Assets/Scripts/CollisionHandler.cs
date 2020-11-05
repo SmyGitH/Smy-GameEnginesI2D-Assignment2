@@ -9,9 +9,7 @@ public class CollisionHandler : MonoBehaviour
   private int correctLayer;
   public float invulnerablePeriod;
   private SpriteRenderer sprite;
-  public AudioSource deathSound;
   private Animator animator;
-  private float flashTimer;
   public bool weaponsUp;
   public bool speedUp;
   public bool shieldUp;
@@ -21,6 +19,7 @@ public class CollisionHandler : MonoBehaviour
   private PlayerShooting playerShoot;
   private PlayerController playerMove;
   private GameManager gameManager;
+  private SoundManager soundManager;
   
 
   private void Start() {
@@ -32,6 +31,7 @@ public class CollisionHandler : MonoBehaviour
       playerMove = gameObject.GetComponent<PlayerController>();
       gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
       animator = GameObject.Find("DamageF").GetComponent<Animator>();
+      soundManager = GameObject.Find("Sounds").GetComponent<SoundManager>();
 
       gameTime = Time.deltaTime;
 
@@ -50,12 +50,13 @@ public class CollisionHandler : MonoBehaviour
       if(other.gameObject.layer == 9 || other.gameObject.layer == 12 || other.gameObject.layer == 13){
           health--;
           invulnerableTimer = invulnerablePeriod;
+          
       }
 
       if(other.gameObject.layer == 8){
-          health--;
           animator.SetBool("Damaged", true);
           invulnerableTimer = invulnerablePeriod;
+          health--;
           
       }
 
@@ -63,20 +64,21 @@ public class CollisionHandler : MonoBehaviour
           weaponsUp = true;
           Destroy(other.gameObject);
           powerTimer = 10f;
+          soundManager.PowerUpSound.Play();
       }else if(other.gameObject.tag == "SpeedUp"){
           speedUp = true;
           Destroy(other.gameObject);
           powerTimer = 10f;
+          soundManager.PowerUpSound.Play();
       }else if (other.gameObject.tag == "ShieldUp"){
           health++;
           Destroy(other.gameObject);
+          soundManager.PowerUpSound.Play();
       } 
     
   }
 
   private void Update() {
-
-      
 
       if(weaponsUp){
           playerShoot.fireRate = 0.5f;
@@ -95,13 +97,7 @@ public class CollisionHandler : MonoBehaviour
               playerMove.maxSpeed = 10f;
           }
       }
-
       
-    if(animator.GetBool("Damaged") == true){
-        animator.SetBool("Damaged", false);
-    }
-        
-
       
       
   }
@@ -125,6 +121,17 @@ public class CollisionHandler : MonoBehaviour
           Die();
           
       }
+  }
+
+  private void OnDestroy() {
+      if(gameObject.layer == 9){
+          soundManager.deathSound.Play();
+      }
+
+      if(gameObject.layer == 8){
+          soundManager.deathSound.Play();
+      }
+
   }
 
   private void Die(){

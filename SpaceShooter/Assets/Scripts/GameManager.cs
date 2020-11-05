@@ -13,14 +13,17 @@ public class GameManager : MonoBehaviour
     public float level;
     public float timer;
     private float flashTimer;
+    private float damageFlashTimer = 2f;
     private Animator levelFlash;
     private Text levelText;
+    private Animator damageFlash;
 
     void Start()
     {
         
         levelFlash = GameObject.Find("Flash").GetComponent<Animator>();
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        damageFlash = GameObject.Find("DamageF").GetComponent<Animator>();
         gameTime = Time.deltaTime;
         score = 0f;
         level = 0f;
@@ -33,7 +36,6 @@ public class GameManager : MonoBehaviour
         timer -= gameTime / 5;
 
          if(timer <= 0){
-          
            setLevel();
            levelFlash.SetBool("LevelSwitch", true);
            flashTimer = 3f;
@@ -46,10 +48,17 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(damageFlash.GetBool("Damaged") == true){
+            damageFlashTimer -= gameTime;
 
+            if(damageFlashTimer <= 0){
+                damageFlash.SetBool("Damaged", false);
+                damageFlashTimer = 2f;
+            }
+        }
+    
         levelText.text = "Level " + level;
-
-       
+        
     }
 
     private void setLevel(){
