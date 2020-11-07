@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 393288211985886608}
   - component: {fileID: 393288211985886609}
   - component: {fileID: 393288211985886614}
+  - component: {fileID: -2919981891912591688}
   m_Layer: 0
   m_Name: DeathParticles
   m_TagString: Untagged
@@ -115,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -221,8 +222,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.990566, g: 0.80833924, b: 0.80833924, a: 1}
-      maxColor: {r: 0.8867924, g: 0.46431112, b: 0.46431112, a: 1}
+      minColor: {r: 1, g: 0.70013624, b: 0, a: 1}
+      maxColor: {r: 0.9622642, g: 0.24964403, b: 0.24964403, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4870,3 +4871,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-2919981891912591688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393288211985886615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d466f6482da2354c9dd95cc05449a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6170,6 +6170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip
       objectReference: {fileID: 0}
+    - target: {fileID: 5295764151502601482, guid: ef816910fa4e40a42808c6eea6f1ae84, type: 3}
+      propertyPath: speedUp
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 860600805, guid: ef816910fa4e40a42808c6eea6f1ae84, type: 3}
     - {fileID: 860600806, guid: ef816910fa4e40a42808c6eea6f1ae84, type: 3}

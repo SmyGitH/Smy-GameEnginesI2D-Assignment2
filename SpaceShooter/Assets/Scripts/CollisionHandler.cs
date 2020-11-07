@@ -127,14 +127,21 @@ public class CollisionHandler : MonoBehaviour
 
   private void OnDestroy() {
       if(gameObject.layer == 9){
-            soundManager.deathSound.Play();
+          if(soundManager != null){
+              soundManager.deathSound.Play();
+              if(soundManager == null){
+                  soundManager = GameObject.Find("Sounds").GetComponent<SoundManager>();
+                  soundManager.deathSound.Play();
+              }
+          }
+            
             Instantiate(deathParticle,transform.position,transform.rotation);
-            Destroy(deathParticle, 1);
           }
           
       if(gameObject.layer == 8){
           soundManager.deathSound.Play();
           gameManager.EndGame();
+          gameManager.gameLost = true;
          }
       }
 
