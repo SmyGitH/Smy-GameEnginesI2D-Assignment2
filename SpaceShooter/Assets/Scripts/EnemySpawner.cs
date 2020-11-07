@@ -6,11 +6,13 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     private float gameTime;
-    public float spawnTimer;
+    private float spawnTimer;
+    public float difficultySpawnTimer;
     // Start is called before the first frame update
     void Start()
     {
         gameTime = Time.deltaTime;
+        spawnTimer = 10f;
     }
 
     // Update is called once per frame
@@ -20,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
 
         if(spawnTimer <= 0){
             Instantiate(enemyPrefab, transform.position, transform.rotation);
-            spawnTimer = 20f;
+            spawnTimer = difficultySpawnTimer;
         }
         
     }

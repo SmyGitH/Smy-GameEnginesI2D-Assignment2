@@ -10,6 +10,7 @@ public class CollisionHandler : MonoBehaviour
   public float invulnerablePeriod;
   private SpriteRenderer sprite;
   private Animator animator;
+  public GameObject deathParticle;
   public bool weaponsUp;
   public bool speedUp;
   public bool shieldUp;
@@ -49,7 +50,11 @@ public class CollisionHandler : MonoBehaviour
 
       if(other.gameObject.layer == 9 || other.gameObject.layer == 12 || other.gameObject.layer == 13){
           health--;
-          invulnerableTimer = invulnerablePeriod;
+
+          if(health > 0){
+              invulnerableTimer = invulnerablePeriod;
+          }
+          
           
       }
 
@@ -97,9 +102,6 @@ public class CollisionHandler : MonoBehaviour
               playerMove.maxSpeed = 10f;
           }
       }
-      
-      
-      
   }
 
   private void FixedUpdate() {
@@ -125,26 +127,29 @@ public class CollisionHandler : MonoBehaviour
 
   private void OnDestroy() {
       if(gameObject.layer == 9){
-          soundManager.deathSound.Play();
-      }
-
+            soundManager.deathSound.Play();
+            Instantiate(deathParticle,transform.position,transform.rotation);
+            Destroy(deathParticle, 1);
+          }
+          
       if(gameObject.layer == 8){
           soundManager.deathSound.Play();
+          gameManager.EndGame();
+         }
       }
 
-  }
 
   private void Die(){
       if(gameObject.tag == "Enemy"){
           Destroy(gameObject);
           gameManager.score += 150;
-          //deathSound.Play();
+          
       }
 
       if(gameObject.tag == "Boss"){
           Destroy(gameObject);
           gameManager.score += 300;
-          //deathSound.Play();
+          
       }
 
       if(gameObject.layer == 12 || gameObject.layer == 13){
@@ -153,7 +158,7 @@ public class CollisionHandler : MonoBehaviour
 
       if(gameObject.layer == 8  || gameObject.layer == 10){
           Destroy(gameObject);
-          //deathSound.Play();
+          
       }
       
   }

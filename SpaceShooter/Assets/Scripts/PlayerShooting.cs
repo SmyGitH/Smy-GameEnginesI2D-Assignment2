@@ -20,7 +20,8 @@ public class PlayerShooting : MonoBehaviour
     {
         cooldownTimer -= gameTime;
 
-        if(Input.GetButton("Fire1") && cooldownTimer <= 0){
+        if(cooldownTimer <= 0){
+
             //shoot
             cooldownTimer = fireRate;
 
@@ -31,4 +32,6 @@ public class PlayerShooting : MonoBehaviour
         }
         
     }
+
+    
 }
