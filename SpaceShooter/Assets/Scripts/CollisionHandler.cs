@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
-   public int health;
+  public int health;
   private float invulnerableTimer;
   private int correctLayer;
   public float invulnerablePeriod;
-  private SpriteRenderer sprite;
-  private Animator animator;
-  public GameObject deathParticle;
+  
   public bool weaponsUp;
   public bool speedUp;
   public bool shieldUp;
@@ -21,6 +19,9 @@ public class CollisionHandler : MonoBehaviour
   private PlayerController playerMove;
   private GameManager gameManager;
   private SoundManager soundManager;
+  private SpriteRenderer sprite;
+  private Animator animator;
+  public GameObject deathParticle;
   
 
   private void Start() {

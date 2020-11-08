@@ -9,10 +9,18 @@ public class GameOver : MonoBehaviour
     public Text score;
     public Text gameOver;
     private GameManager gameManager;
+    private CollisionHandler collisionHandler;
     // Start is called before the first frame update
+
+    private void Awake() 
+    {
+        
+    }
+
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        collisionHandler = GameObject.Find("PlayerShip").GetComponent<CollisionHandler>();
     }
 
     // Update is called once per frame
@@ -31,12 +39,6 @@ public class GameOver : MonoBehaviour
 
     public void RestartGame(){
          SceneManager.LoadScene("GameScene");
-         gameManager.gameWon = false;
-         gameManager.gameLost = false;
-         gameManager.gameHasEnded = false;
-         gameManager.score = 0f;
-         gameManager.level = 0f;
-         gameManager.timer = 0f;
     }
 
     public void QuitGame(){
