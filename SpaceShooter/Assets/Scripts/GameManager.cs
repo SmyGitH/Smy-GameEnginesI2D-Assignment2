@@ -16,12 +16,14 @@ public class GameManager : MonoBehaviour
     private float flashTimer = 2f;
     private float damageFlashTimer = 2f;
     //private float restartDelay = 2f;
-    [HideInInspector] public bool gameHasEnded = false;
-    [HideInInspector] public bool gameLost = false;
-    [HideInInspector] public bool gameWon = false;
+    [HideInInspector] public bool gameHasEnded;
+    [HideInInspector] public bool gameLost;
+    [HideInInspector] public bool gameWon;
     private Animator levelFlash;
     private Text levelText;
     private Animator damageFlash;
+    private GameObject BossSpawner1;
+    private GameObject EnemySpawner1;
     private GameObject BossSpawner2;
     private GameObject EnemySpawner2;
     private GameObject EnemySpawner3;
@@ -50,8 +52,12 @@ public class GameManager : MonoBehaviour
         BossSpawner1 = GameObject.Find("BossSpawner1");
         BossSpawner2 = GameObject.Find("BossSpawner2");
         BossSpawner3 = GameObject.Find("BossSpawner3");
+        EnemySpawner1 = GameObject.Find("EnemySpawner1");
         EnemySpawner2 = GameObject.Find("EnemySpawner2");
         EnemySpawner3 = GameObject.Find("EnemySpawner3");
+        gameHasEnded = false;
+        gameWon = false;
+        gameLost = false;
         HUD = GameObject.Find("HUD");
         gameOverHUD = GameObject.Find("GameOverHUD");
         levelFlash = GameObject.Find("Flash").GetComponent<Animator>();
@@ -110,9 +116,9 @@ public class GameManager : MonoBehaviour
 
         level++;
 
-
-        switch(level){
-            case 1: timer = 25f;
+        if(gameHasEnded == false){
+            switch(level){
+            case 1: timer = 20f;
             DestroyBosses();
             DestroyEnemies();
             levelFlash.SetBool("LevelSwitch", true);
@@ -123,7 +129,7 @@ public class GameManager : MonoBehaviour
             EnemySpawner3.SetActive(false);
             break;
 
-            case 2: timer = 35f;
+            case 2: timer = 25f;
             DestroyBosses();
             DestroyEnemies();
             levelFlash.SetBool("LevelSwitch", true);
@@ -131,7 +137,7 @@ public class GameManager : MonoBehaviour
             EnemySpawner2.SetActive(true);
             break;
 
-            case 3: timer = 45f;
+            case 3: timer = 30f;
             DestroyBosses();
             DestroyEnemies();
             levelFlash.SetBool("LevelSwitch", true);
@@ -141,13 +147,13 @@ public class GameManager : MonoBehaviour
 
             case 4: EndGame();
             gameWon = true;
-            DestroyBosses();
-            DestroyEnemies();
             break;
 
             default:
             break;       
+         }
         }
+        
     }
 
     private void DestroyEnemies(){
@@ -170,10 +176,19 @@ public class GameManager : MonoBehaviour
 
 
     public void EndGame(){
+
         if(gameHasEnded == false){
+            DestroyBosses();
+            DestroyEnemies();
             gameHasEnded = true;
             HUD.SetActive(false);
             gameOverHUD.SetActive(true);
+            BossSpawner1.SetActive(false);
+            EnemySpawner1.SetActive(false);
+            BossSpawner2.SetActive(false);
+            EnemySpawner2.SetActive(false);
+            BossSpawner3.SetActive(false);
+            EnemySpawner3.SetActive(false);
         }
         
     }
